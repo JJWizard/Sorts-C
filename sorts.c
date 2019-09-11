@@ -9,11 +9,15 @@ Salida: Tabla comparativa del tiempo de ejecución de los métodos de ordenació
 #include <stdlib.h>
 #include <time.h>
 
+/* Funciones para medir el tiempo de ejecución*/
 void control( double **, char **name);
 void exe_time(double **, char **);
+/*Funciones para crear y borrar archivos*/
 void create_files(char **name);
 void delete_files(char **name);
+/* Funcio para iterar sobre el apuntador*/
 void interaction(int *, int);
+/* Colaca el nombre del archivo por un apuntador  de apuntadore de tipo char */
 void set_names(char **, char **);
 void filerand(char *, int, int);
 int countfile(char *);
@@ -31,13 +35,17 @@ void killdb(double **, int );
 const int INF=999999;
 int main(){
 	char **name=(char**)calloc(3, sizeof(char*)), **sort=(char**)calloc(3, sizeof(char*));
+	/* Tiempo de ejecución*/
 	double **total_time=NULL;	
 	time_t t;
 	srand((unsigned) time(&t));
-
+	/* Se colocan el tiempo*/
 	total_time=set_timevar();
+	/* Se colocan los nombres a los sorts*/
 	set_names(name, sort);
+	/* Se crean los archivos aleatorios*/
 	create_files(name);
+	/* Esta función inicia el programa*/
 	control(total_time, name);
 	exe_time(total_time, sort);
 	delete_files(name);
@@ -53,10 +61,13 @@ void control(double **total_time, char **name){
 	int j=0, n=0;
 	for(int i=0; i<3; i++){
 		//Insertion Sort
+		/* command count in bash*/
 		n=countfile(name[i]);
+		/*Se lee el archivo */
 		A=readfile(name[i], n);
 		start[0][j] = clock();
-
+		/* Se aplica la función*/
+		/* Fijarse cuales funciones son utiles para que esta función trabaja correctamente*/
 		insertion_sort(A, n); 
 
 		end[0][j] = clock();
